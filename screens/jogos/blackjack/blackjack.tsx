@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
+import { View, Text, Image,
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
-  SafeAreaView, // adicione aqui
+  SafeAreaView,
 } from "react-native";
-import { useDeck } from "../../hooks/useDeck";
-import { useDrawCard, Card } from "../../hooks/useDrawCard";
+import { useDeck } from "../../../hooks/useDeck";
+import { useDrawCard, Card } from "../../../hooks/useDrawCard";
 import styles from "./blackjack-styles";
 
-const Blackjack: React.FC = () => {
+const Blackjack = () => {
   const { deckId, loadDeck } = useDeck(6);
   const { drawCard } = useDrawCard();
   const [player, setPlayer] = useState<Card[]>([]);
