@@ -1,10 +1,10 @@
 import { View } from "react-native";
-import Blackjack from "./screens/blackjack/blackjack";
+import Perfil from "./screens/perfil/perfil";
 
 function App() {
   return (
-    <View>
-      <Blackjack />
+    <View style={{ flex: 1 }}>
+      <Perfil />
     </View>
   );
 }
