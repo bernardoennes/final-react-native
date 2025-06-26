@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#222",
     alignItems: "center",
     justifyContent: "center",
-    minHeight: '100%',
+    // minHeight: '100%',
   },
   title: {
     fontSize: 30,
