@@ -16,17 +16,17 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#4b0c00',
         width: 300,
-        minHeight: 300,
+        height: 300,
         borderColor: "#000",
         borderWidth: 5,
         borderRadius: 10,
-        margin: 30,
+        marginTop: 30,
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
     },
 
-    bjlogo: {
+    gamelogo: {
         width: '100%',
         height: '100%',
         resizeMode: 'contain',
