@@ -5,6 +5,11 @@ const styles = StyleSheet.create({
     marginRight: 8,
     borderWidth: 1,
     borderColor: "black",
+    width: 60,
+    height: 90,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: "transparent",
   },
   cardSelectedRed: {
     borderWidth: 3,

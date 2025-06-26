@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image,
-  ScrollView,
+import {
+  View,
+  Text,
   ActivityIndicator,
   TouchableOpacity,
   SafeAreaView,
@@ -8,6 +9,7 @@ import { View, Text, Image,
 import { useDeck } from "../../../hooks/useDeck";
 import { useDrawCard, Card } from "../../../hooks/useDrawCard";
 import styles from "./blackjack-styles";
+import CardList from "../../../components/CardList/cardList";
 
 const Blackjack = () => {
   const { deckId, loadDeck } = useDeck(6);
@@ -85,16 +87,6 @@ const Blackjack = () => {
     setGameOver(true);
   };
 
-  const CardRow: React.FC<{ cards: Card[] }> = ({ cards }) => (
-    <View style={styles.cardRow}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {cards.map((c: Card, i: number) => (
-          <Image key={i} source={{ uri: c.image }} style={styles.card} />
-        ))}
-      </ScrollView>
-    </View>
-  );
-
   if (loading || !player.length || !dealer.length) {
     return (
       <View style={styles.container}>
@@ -104,29 +96,27 @@ const Blackjack = () => {
     );
   }
 
+  const dealerCardsToShow = gameOver
+    ? dealer
+    : [
+        ...dealer.slice(0, -1),
+        {
+          ...dealer[dealer.length - 1],
+          image: "https://deckofcardsapi.com/static/img/back.png",
+        },
+      ];
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Blackjack</Text>
 
       <Text style={styles.text}>Suas cartas ({getTotal(player)})</Text>
-      <CardRow cards={player} />
+      <CardList cards={player} onCardPress={() => {}} />
 
       <Text style={styles.text}>
         Casa ({gameOver ? getTotal(dealer) : "?"})
       </Text>
-      <CardRow
-        cards={
-          gameOver
-            ? dealer
-            : [
-                ...dealer.slice(0, -1),
-                {
-                  ...dealer[dealer.length - 1],
-                  image: "https://deckofcardsapi.com/static/img/back.png",
-                },
-              ]
-        }
-      />
+      <CardList cards={dealerCardsToShow} onCardPress={() => {}} />
 
       {!gameOver && (
         <>
