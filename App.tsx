@@ -5,7 +5,7 @@ import Escopa from "./screens/jogos/escopa/escopa";
 function App() {
   return (
     <View>
-      <Blackjack />
+      <Escopa />
     </View>
   );
 }
