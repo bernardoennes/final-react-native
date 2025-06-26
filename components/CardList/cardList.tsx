@@ -12,7 +12,11 @@ interface CardListProps {
 }
 
 const CardList = ({ cards, onCardPress, selectedCards, selectedStyle }: CardListProps) => (
-  <ScrollView horizontal style={styles.cardsScroll}>
+  <ScrollView
+    horizontal
+    style={styles.cardsScroll}
+    contentContainerStyle={{ alignItems: "center", justifyContent: "center", flexGrow: 1 }}
+  >
     {cards.map((card, index) => {
       let selected = false;
       if (Array.isArray(selectedCards)) {

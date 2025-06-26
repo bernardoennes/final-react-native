@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 import { useDeck } from "../../../hooks/useDeck";
 import { useDrawCard, Card } from "../../../hooks/useDrawCard";
 import styles from "./blackjack-styles";
-import CardList from "../../../components/CardList/cardList";
+import GameButton from "../../../components/GameButton/gameButton";
+import Loading from "../../../components/Loading/loading";
 
-const Blackjack = () => {
+const Blackjack: React.FC = () => {
   const { deckId, loadDeck } = useDeck(6);
   const { drawCard } = useDrawCard();
   const [player, setPlayer] = useState<Card[]>([]);
@@ -87,54 +82,55 @@ const Blackjack = () => {
     setGameOver(true);
   };
 
-  if (loading || !player.length || !dealer.length) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#fff" />
-        <Text style={{ color: "#fff" }}>Carregando cartas...</Text>
-      </View>
-    );
-  }
+  const CardRow: React.FC<{ cards: Card[] }> = ({ cards }) => (
+    <View style={styles.cardRow}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {cards.map((c: Card, i: number) => (
+          <Image key={i} source={{ uri: c.image }} style={styles.card} />
+        ))}
+      </ScrollView>
+    </View>
+  );
 
-  const dealerCardsToShow = gameOver
-    ? dealer
-    : [
-        ...dealer.slice(0, -1),
-        {
-          ...dealer[dealer.length - 1],
-          image: "https://deckofcardsapi.com/static/img/back.png",
-        },
-      ];
+  if (loading || !player.length || !dealer.length) {
+    return <Loading />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Blackjack</Text>
 
       <Text style={styles.text}>Suas cartas ({getTotal(player)})</Text>
-      <CardList cards={player} onCardPress={() => {}} />
+      <CardRow cards={player} />
 
       <Text style={styles.text}>
         Casa ({gameOver ? getTotal(dealer) : "?"})
       </Text>
-      <CardList cards={dealerCardsToShow} onCardPress={() => {}} />
+      <CardRow
+        cards={
+          gameOver
+            ? dealer
+            : [
+                ...dealer.slice(0, -1),
+                {
+                  ...dealer[dealer.length - 1],
+                  image: "https://deckofcardsapi.com/static/img/back.png",
+                },
+              ]
+        }
+      />
 
       {!gameOver && (
         <>
-          <TouchableOpacity style={styles.button} onPress={handleDrawCard}>
-            <Text style={styles.buttonText}>Pedir Carta</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={stop}>
-            <Text style={styles.buttonText}>Parar</Text>
-          </TouchableOpacity>
+          <GameButton onPress={handleDrawCard}>Pedir Carta</GameButton>
+          <GameButton onPress={stop}>Parar</GameButton>
         </>
       )}
 
       {msg !== "" && (
         <>
           <Text style={styles.result}>{msg}</Text>
-          <TouchableOpacity style={styles.button} onPress={startGame}>
-            <Text style={styles.buttonText}>Jogar Novamente</Text>
-          </TouchableOpacity>
+          <GameButton onPress={startGame}>Jogar Novamente</GameButton>
         </>
       )}
     </SafeAreaView>
