@@ -1,10 +1,12 @@
 import { View } from "react-native";
 import Blackjack from "./screens/blackjack/blackjack";
+import { SpiderGame } from "./screens/spider/SpiderGame";
 
 function App() {
   return (
     <View>
-      <Blackjack />
+      {/* <Blackjack /> */}
+      <SpiderGame />
     </View>
   );
 }
