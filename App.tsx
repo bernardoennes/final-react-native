@@ -4,9 +4,14 @@ import Escopa from "./screens/jogos/escopa/escopa";
 import Home from "./screens/home/home"
 
 
+import MemoryGame from "./screens/memory/MemoryGame";
+
 function App() {
   return (
-    <Home/>
+    <>
+      <MemoryGame />
+      <Home/>
+    </>
   );
 }
 
