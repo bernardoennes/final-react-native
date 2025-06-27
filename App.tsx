@@ -1,13 +1,14 @@
 import { View } from "react-native";
 import Blackjack from "./screens/blackjack/blackjack";
-import { SpiderGame } from "./screens/spider/SpiderGame";
+
+import MemoryGame from "./screens/memory/MemoryGame";
 
 function App() {
   return (
-    <View>
+    <>
       {/* <Blackjack /> */}
-      <SpiderGame />
-    </View>
+      <MemoryGame />
+    </>
   );
 }
 
