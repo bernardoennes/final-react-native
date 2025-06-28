@@ -1,14 +1,32 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  /*
-  container: {
-    // flex: 1,
+  logo:{
+    width:140,
+    height:140,
+    resizeMode:"contain",
+    marginBottom:20,
+},
+
+  background: {
+    flex: 1,
+    resizeMode: "cover",
     justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#fff",
+    alignItems: "center",
   },
-  */
+
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.6)", 
+    padding: 30,
+    margin: 20,
+    borderRadius: 16,
+    alignItems: "center",
+    width:"90%",
+    shadowColor:"#000",
+
+
+  },
+
   container: {
     flex: 1,
     justifyContent: "center",
@@ -18,16 +36,19 @@ const styles = StyleSheet.create({
     fontSize: 26,
     textAlign: "center",
     marginBottom: 30,
+    color: "#fff",
   },
   subtitle: {
     fontSize: 16,
     textAlign: "center",
     marginBottom: 15,
+    color: "#fff",
   },
   email: {
     fontSize: 14,
     textAlign: "center",
     marginBottom: 20,
+    color: "#fff",
   },
   input: {
     borderWidth: 1,
@@ -36,7 +57,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     backgroundColor: "#fff",
-    width: "90%",
+    width: "100%",
   },
   errorText: {
     color: "red",
@@ -44,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#4B5320",
     padding: 12,
     borderRadius: 5,
     alignItems: "center",
