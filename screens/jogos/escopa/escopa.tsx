@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView, Text } from "react-native";
 import styles from "./escopa-styles";
 import Loading from "../../../components/Loading/loading";
@@ -11,21 +11,46 @@ import GameButton from "../../../components/GameButton/gameButton";
 import { Card } from "../../../hooks/useDrawCard";
 import { useEscopaGame } from "./utils/useEscopaGame";
 import { usePlayCard } from "./utils/usePlayCard";
+import { useDealerPlay } from "./utils/useDealerPlay";
 
 const Escopa = () => {
   const {
     loading, playerHand, dealerHand, tableCards, message, selectedCard,
     selectedTableCards, playerCaptured, dealerCaptured, playerEscopas,
     dealerEscopas, isPlayerTurn, startGame, setSelectedCard,
-    setSelectedTableCards, setMessage, gameOver
+    setSelectedTableCards, setMessage, gameOver, setPlayerHand,
+    setTableCards, setPlayerCaptured,
+    setDealerHand, setDealerCaptured, setIsPlayerTurn, setGameOver
   } = useEscopaGame();
-  
+
+  useEffect(() => {
+    startGame();
+  }, []);
+
+  const dealerPlay = useDealerPlay({
+    dealerHand,
+    tableCards,
+    setDealerHand,
+    setTableCards,
+    setDealerCaptured,
+    dealerCaptured,
+    setIsPlayerTurn,
+  });
+
   const playCard = usePlayCard({
     selectedCard,
     isPlayerTurn,
     selectedTableCards,
-    setMessage,
     tableCards,
+    playerHand,
+    setPlayerHand,
+    setTableCards,
+    setSelectedCard,
+    setMessage,
+    setSelectedTableCards,
+    playerCaptured,
+    setPlayerCaptured,
+    dealerPlay,
   });
 
   if (loading) return <Loading />;
@@ -71,7 +96,18 @@ const Escopa = () => {
       {!isPlayerTurn && !gameOver && (
         <Text style={styles.dealerTurnText}>Turno do dealer...</Text>
       )}
-      <GameFooter message={message} gameOver={gameOver} onRestart={startGame} />
+      <GameFooter
+        message={message}
+        gameOver={gameOver}
+        onRestart={startGame}
+        playerHand={playerHand}
+        dealerHand={dealerHand}
+        playerCaptured={playerCaptured}
+        dealerCaptured={dealerCaptured}
+        setMessage={setMessage}
+        setIsPlayerTurn={setIsPlayerTurn}
+        setGameOver={setGameOver}
+      />
     </SafeAreaView>
   );
 };

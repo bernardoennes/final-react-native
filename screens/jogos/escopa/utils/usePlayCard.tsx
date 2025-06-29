@@ -7,6 +7,14 @@ interface UsePlayCardParams {
   selectedTableCards: Card[];
   setMessage: (msg: string) => void;
   tableCards: Card[];
+  playerHand: Card[];
+  setPlayerHand: (cards: Card[]) => void;
+  setTableCards: (cards: Card[]) => void;
+  setSelectedCard: (card: Card | null) => void;
+  setSelectedTableCards: (cards: Card[]) => void;
+  playerCaptured: Card[];
+  setPlayerCaptured: (cards: Card[]) => void;
+  dealerPlay: () => void;
 }
 
 const getCardValue = (card: Card): number => {
@@ -23,6 +31,14 @@ export function usePlayCard({
   selectedTableCards,
   setMessage,
   tableCards,
+  playerHand,
+  setPlayerHand,
+  setTableCards,
+  setSelectedCard,
+  setSelectedTableCards,
+  playerCaptured,
+  setPlayerCaptured,
+  dealerPlay
 }: UsePlayCardParams) {
   return useCallback(() => {
     if (!selectedCard || !isPlayerTurn) return;
@@ -49,5 +65,30 @@ export function usePlayCard({
         capturedCards = [matchingCard];
       }
     }
-  }, [selectedCard, isPlayerTurn, selectedTableCards, setMessage, tableCards]);
+
+    if (capturedCards.length > 0) {
+      setTableCards(
+        tableCards.filter(
+          (c) => !capturedCards.some((cap) => cap.code === c.code)
+        )
+      );
+      setPlayerCaptured([...playerCaptured, selectedCard, ...capturedCards]);
+    } else {
+      setTableCards([...tableCards, selectedCard]);
+    }
+
+
+    setPlayerHand(playerHand.filter((c) => c.code !== selectedCard.code));
+    setSelectedCard(null);
+    setSelectedTableCards([]);
+
+    setTimeout(() => {
+      dealerPlay();
+    }, 700);
+  }, [
+    selectedCard, isPlayerTurn, selectedTableCards, setMessage,
+    tableCards, playerHand, setPlayerHand, setTableCards,
+    setSelectedCard, setSelectedTableCards, playerCaptured, setPlayerCaptured,
+    dealerPlay, 
+  ]);
 }

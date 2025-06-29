@@ -52,5 +52,8 @@ export const useEscopaGame = () => {
     playerEscopas, dealerEscopas,
     isPlayerTurn,
     setSelectedCard, setSelectedTableCards, setMessage, startGame,
+    setPlayerHand, setTableCards, setPlayerCaptured,
+    setDealerHand, setDealerCaptured, setIsPlayerTurn,
+    setGameOver
   };
 };
