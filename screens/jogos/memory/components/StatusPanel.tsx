@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../MemoryGame-styles";
+import GameButton from "../../../../components/GameButton/gameButton";
 
 interface Props {
   moves: number;
@@ -12,9 +13,9 @@ export default function StatusPanel({ moves, won, onRestart }: Props) {
   return won ? (
     <View style={styles.wonBox}>
       <Text style={styles.wonText}>Você venceu em {moves} jogadas!</Text>
-      <TouchableOpacity style={styles.button} onPress={onRestart}>
-        <Text style={styles.buttonText}>Jogar novamente</Text>
-      </TouchableOpacity>
+      <GameButton onPress={onRestart}>
+        <Text>Jogar novamente</Text>
+      </GameButton>
     </View>
   ) : (
     <Text style={styles.movesText}>Jogadas: {moves}</Text>

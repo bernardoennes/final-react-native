@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
     minHeight: 120,
     width: "100%",
   },
-  // Adicione ao seu styles:
   scoreContainer: {
     flexDirection: "row",
     justifyContent: "space-around",

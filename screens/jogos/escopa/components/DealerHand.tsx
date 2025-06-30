@@ -5,7 +5,7 @@ import styles from "../escopa-styles";
 const DealerHand = ({ count }: { count: number }) => (
   <View style={styles.dealerHandRow}>
     {Array.from({ length: count }).map((_, idx) => (
-      <Image key={idx} source={{ uri: "https://deckofcardsapi.com/static/img/back.png" }} style={styles.dealerCard} />
+      <Image key={idx} source={require("../../../../assets/cardBack.png")} style={styles.dealerCard} />
     ))}
   </View>
 );

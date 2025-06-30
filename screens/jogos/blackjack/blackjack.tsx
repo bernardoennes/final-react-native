@@ -71,7 +71,7 @@ const Blackjack = () => {
                   ...dealer.slice(0, -1),
                   {
                     ...dealer[dealer.length - 1],
-                    image: "https://deckofcardsapi.com/static/img/back.png",
+                    image: require("../../../assets/cardBack.png"),
                   },
                 ]
           }
