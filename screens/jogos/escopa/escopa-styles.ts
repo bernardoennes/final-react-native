@@ -4,10 +4,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    backgroundColor: "#1E2D24", // verde escuro elegante
+    paddingTop: 60,
     minHeight: "100%",
     alignItems: "center",
-    justifyContent: "flex-start",
   },
   title: {
     fontSize: 32,
@@ -46,29 +45,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
-  playButton: {
-    backgroundColor: "#27AE60",
-    padding: 14,
-    alignItems: "center",
-    marginVertical: 10,
-    borderRadius: 10,
-    width: 220,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
-  },
-  playButtonText: {
-    color: "#fff",
-    fontSize: 17,
-    fontWeight: "bold",
-    letterSpacing: 1,
-  },
   dealerTurnText: {
     textAlign: "center",
     fontSize: 16,
-    color: "#FFB74D",
+    color: "#FFD700",
+    textShadowColor: "#000",
     marginVertical: 8,
     fontStyle: "italic",
   },
@@ -80,25 +61,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   messageGameOver: {
-    color: "#E53935",
-  },
-  restartButton: {
-    backgroundColor: "#2980B9",
-    padding: 14,
-    alignItems: "center",
-    borderRadius: 10,
-    marginTop: 12,
-    width: 220,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
-  },
-  restartButtonText: {
-    color: "#fff",
-    fontSize: 17,
-    fontWeight: "bold",
+    color: "#FFD700",
+    textShadowColor: "#000",
   },
   dealerHandRow: {
     flexDirection: "row",
@@ -132,6 +96,29 @@ const styles = StyleSheet.create({
     marginVertical: 24,
     minHeight: 120,
     width: "100%",
+  },
+  // Adicione ao seu styles:
+  scoreContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    borderRadius: 10,
+    marginVertical: 10,
+  },
+  scoreBlock: {
+    alignItems: "center",
+    marginHorizontal: 20,
+  },
+  scoreTitle: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#fff",
+  },
+  scoreValue: {
+    fontSize: 14,
+    color: "#fff",
   },
 });
 

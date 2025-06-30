@@ -1,13 +1,27 @@
 import React, { useEffect } from "react";
 import { Text } from "react-native";
 import GameButton from "../../../../components/GameButton/gameButton";
+import ScoreDisplay from "./ScoreDisplay";
+import SelectedInfo from "./SelectedInfo";
 import styles from "../escopa-styles";
+import { Card } from "../../../../hooks/useDrawCard";
 
-const GameFooter = ({ message, gameOver, onRestart, playerHand, dealerHand, playerCaptured, dealerCaptured, setMessage, setIsPlayerTurn, setGameOver }: {
+const GameFooter = ({
+  message, gameOver, onRestart,
+  playerHand, dealerHand,
+  playerCaptured, dealerCaptured,
+  setMessage, setIsPlayerTurn, setGameOver,
+  selectedCard, selectedTableCards,
+  isPlayerTurn,
+  playCard,
+}: {
   message: string, gameOver: boolean, onRestart: () => void,
-  playerHand: any[], dealerHand: any[],
-  playerCaptured: any[], dealerCaptured: any[],
-  setMessage: (msg: string) => void, setIsPlayerTurn: (isPlayerTurn: boolean) => void, setGameOver: (gameOver: boolean) => void
+  playerHand: Card[], dealerHand: Card[],
+  playerCaptured: Card[], dealerCaptured: Card[],
+  setMessage: (msg: string) => void, setIsPlayerTurn: (isPlayerTurn: boolean) => void, setGameOver: (gameOver: boolean) => void,
+  selectedCard: Card | null, selectedTableCards: Card[],
+  isPlayerTurn: boolean,
+  playCard: () => void,
 }) => {
   useEffect(() => {
     if (
@@ -38,13 +52,29 @@ const GameFooter = ({ message, gameOver, onRestart, playerHand, dealerHand, play
     setGameOver,
   ]);
 
+  if (selectedCard && isPlayerTurn && !gameOver) {
+    return (
+      <>
+        <SelectedInfo card={selectedCard} tableCards={selectedTableCards} />
+        <GameButton onPress={playCard}>
+          JOGAR CARTA
+        </GameButton>
+      </>
+    );
+  }
+
+  // Placar ou mensagem de fim de jogo
   return (
     <>
+      <ScoreDisplay
+        playerCaptured={playerCaptured.length}
+        dealerCaptured={dealerCaptured.length}
+      />
       {message !== "" && (
         <Text style={[styles.message, gameOver ? styles.messageGameOver : null]}>{message}</Text>
       )}
       {gameOver && (
-        <GameButton onPress={onRestart} style={styles.restartButton}>
+        <GameButton onPress={onRestart}>
           JOGAR NOVAMENTE
         </GameButton>
       )}

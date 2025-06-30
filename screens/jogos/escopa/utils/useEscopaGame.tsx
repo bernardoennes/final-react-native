@@ -15,8 +15,6 @@ export const useEscopaGame = () => {
   const [isPlayerTurn, setIsPlayerTurn] = useState<boolean>(true);
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const [playerEscopas, setPlayerEscopas] = useState<number>(0);
-  const [dealerEscopas, setDealerEscopas] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
   const startGame = async () => {
@@ -30,8 +28,6 @@ export const useEscopaGame = () => {
       setTableCards(cards.slice(6, 10));
       setPlayerCaptured([]);
       setDealerCaptured([]);
-      setPlayerEscopas(0);
-      setDealerEscopas(0);
       setSelectedCard(null);
       setSelectedTableCards([]);
       setIsPlayerTurn(true);
@@ -49,7 +45,6 @@ export const useEscopaGame = () => {
     playerHand, dealerHand, tableCards,
     selectedCard, selectedTableCards,
     playerCaptured, dealerCaptured,
-    playerEscopas, dealerEscopas,
     isPlayerTurn,
     setSelectedCard, setSelectedTableCards, setMessage, startGame,
     setPlayerHand, setTableCards, setPlayerCaptured,

@@ -4,10 +4,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    backgroundColor: "#1E2D24",
+    paddingTop: 60,
     minHeight: "100%",
     alignItems: "center",
-    justifyContent: "center",
   },
   title: {
     fontSize: 32,
@@ -51,25 +50,6 @@ const styles = StyleSheet.create({
     textShadowColor: "#000",
     textShadowOffset: { width: 1, height: 2 },
     textShadowRadius: 3,
-  },
-  button: {
-    backgroundColor: "#27AE60",
-    padding: 14,
-    alignItems: "center",
-    marginVertical: 10,
-    borderRadius: 10,
-    width: 220,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 17,
-    fontWeight: "bold",
-    letterSpacing: 1,
   },
   loadingText: {
     color: "#fff",

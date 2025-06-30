@@ -6,7 +6,7 @@ import MemoryGame from "./screens/memory/MemoryGame";
 
 function App() {
   return (
-    <Home/>
+    <Escopa/>
   );
 }
 

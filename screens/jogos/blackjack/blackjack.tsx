@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, ImageBackground } from "react-native";
 import { useDeck } from "../../../hooks/useDeck";
 import { useDrawCard, Card } from "../../../hooks/useDrawCard";
 import styles from "./blackjack-styles";
 import GameButton from "../../../components/GameButton/gameButton";
 import Loading from "../../../components/Loading/loading";
-
 import { useGetTotal } from "./utils/getTotal";
 import { useHandleDrawCard } from "./utils/handleDrawCard";
 import { useStop } from "./utils/stop";
 import CardRow from "./components/CardRow";
+import NavBar from "../../../components/navbar";
+
+const background = require("../../../assets/baizered-background.png");
 
 const Blackjack = () => {
   const { deckId, loadDeck } = useDeck(6);
@@ -50,40 +52,46 @@ const Blackjack = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Blackjack</Text>
+    <ImageBackground source={background} style={{ flex: 1 }}>
+      <NavBar></NavBar>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Blackjack</Text>
 
-      <Text style={styles.text}>Suas cartas ({getTotal(player)})</Text>
-      <CardRow cards={player} />
+        <Text style={styles.text}>Suas cartas ({getTotal(player)})</Text>
+        <CardRow cards={player} />
 
-      <Text style={styles.text}>
-        Casa ({gameOver ? getTotal(dealer) : "?"})
-      </Text>
-      <CardRow
-        cards={
-          gameOver ? dealer : [...dealer.slice(0, -1),
-                {
-                  ...dealer[dealer.length - 1],
-                  image: "https://deckofcardsapi.com/static/img/back.png",
-                },
-              ]
-        }
-      />
+        <Text style={styles.text}>
+          Casa ({gameOver ? getTotal(dealer) : "?"})
+        </Text>
+        <CardRow
+          cards={
+            gameOver
+              ? dealer
+              : [
+                  ...dealer.slice(0, -1),
+                  {
+                    ...dealer[dealer.length - 1],
+                    image: "https://deckofcardsapi.com/static/img/back.png",
+                  },
+                ]
+          }
+        />
 
-      {!gameOver && (
-        <>
-          <GameButton onPress={handleDrawCard}>Pedir Carta</GameButton>
-          <GameButton onPress={stop}>Parar</GameButton>
-        </>
-      )}
+        {!gameOver && (
+          <>
+            <GameButton onPress={handleDrawCard}>Pedir Carta</GameButton>
+            <GameButton onPress={stop}>Parar</GameButton>
+          </>
+        )}
 
-      {msg !== "" && (
-        <>
-          <Text style={styles.result}>{msg}</Text>
-          <GameButton onPress={startGame}>Jogar Novamente</GameButton>
-        </>
-      )}
-    </SafeAreaView>
+        {msg !== "" && (
+          <>
+            <Text style={styles.result}>{msg}</Text>
+            <GameButton onPress={startGame}>Jogar Novamente</GameButton>
+          </>
+        )}
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
