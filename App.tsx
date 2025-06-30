@@ -4,11 +4,18 @@ import Escopa from "./screens/jogos/escopa/escopa";
 import Home from "./screens/home/home"
 import MemoryGame from "./screens/memory/MemoryGame";
 import { Routes } from "./routes";
+import Perfil from "./screens/perfil/perfil";
+import React from "react";
+import { UserProvider } from "./context/usercontext"; // ajuste o caminho se necessário
+
+
 
 
 function App() {
   return (
-    <Routes/>
+    <UserProvider>
+      <Perfil />
+    </UserProvider>
   );
 }
 
