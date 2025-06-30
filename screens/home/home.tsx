@@ -8,6 +8,7 @@ import { RootStackParamList } from "../../routes/nativestack";
 const background = require("../../assets/baizered-background.png");
 const bjlogo = require("../../assets/bjlogo.png");
 const scopalogo = require("../../assets/scopalogo.png");
+const memorylogo = require("../../assets/memorylogo.png");
 
 type SkillScreenProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -22,6 +23,9 @@ export function Home({navigation}: SkillScreenProps) {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("Scopa")} style={styles.button}>
                     <Image source={scopalogo} style={styles.gamelogo} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Memory")} style = {styles.button}>
+                    <Image source={memorylogo} style = {styles.gamelogo}></Image>
                 </TouchableOpacity>
             </ScrollView>
         </ImageBackground>
