@@ -9,8 +9,6 @@ import React from "react";
 import { UserProvider } from "./context/usercontext"; // ajuste o caminho se necessário
 
 
-
-
 function App() {
   return (
     <UserProvider>
