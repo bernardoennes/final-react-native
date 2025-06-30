@@ -11,7 +11,12 @@ const CardRow: React.FC<CardRowProps> = ({ cards }) => (
   <View style={styles.cardRow}>
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {cards.map((c: Card, i: number) => (
-        <Image key={i} source={{ uri: c.image }} style={styles.card} />
+        <Image
+          key={i}
+          // Trecho que tive que mecher porque as cartas são URLs, mas a parte de tras é um jpg
+          source={typeof c.image === "string" ? { uri: c.image } : c.image}
+          style={styles.card}
+        />
       ))}
     </ScrollView>
   </View>

@@ -13,7 +13,7 @@ export default function MemoryGameScreen() {
   if (loading) return <Overlay type="loading" />;
   if (error) return <Overlay type="error" message={error} retry={restart} />;
 
-  const background = require("../memory/baizeblue-background.png");
+  const background = require("../../../assets/baizeblue-background.png");
 
   return (
     <ImageBackground source={background} style={styles.background}>

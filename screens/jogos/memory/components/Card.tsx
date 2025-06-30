@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity, View, Image } from "react-native";
 import styles from "../MemoryGame-styles";
 
-const cardBackImage = require("../cardBack.png");
+const cardBackImage = require("../../../assets/cardBack.png");
 
 interface Props {
   id: string;
