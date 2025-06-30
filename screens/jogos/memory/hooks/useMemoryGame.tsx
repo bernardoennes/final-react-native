@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useDeck } from "../../../hooks/useDeck";
-import { useDrawCard, Card as ApiCard } from "../../../hooks/useDrawCard";
+import { useDeck } from "../../../../hooks/useDeck";
+import { useDrawCard, Card as ApiCard } from "../../../../hooks/useDrawCard";
 
 const DEFAULT_PAIRS = 8;
 
