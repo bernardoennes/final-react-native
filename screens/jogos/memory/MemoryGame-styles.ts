@@ -1,4 +1,3 @@
-// MemoryGame-styles.ts
 import { StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -9,19 +8,16 @@ const CARD_WIDTH = (width - 32 - GAP * (COLUMNS + 1)) / COLUMNS;
 const CARD_HEIGHT = CARD_WIDTH * 1.4;
 
 export default StyleSheet.create({
-  /* --- novo estilo de fundo --- */
   background: {
     flex: 1,
-    resizeMode: "cover", // cobre toda a tela
+    resizeMode: "cover",
   },
 
-  /* --- substituído: antes era vermelho --- */
   safeContainer: {
     flex: 1,
     backgroundColor: "transparent",
   },
 
-  /* --- o restante permanece igual --- */
   container: {
     flex: 1,
     paddingHorizontal: 16,
@@ -90,7 +86,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#FFCC00",
+    backgroundColor: "#000",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,

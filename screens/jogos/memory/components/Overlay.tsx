@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import styles from "../MemoryGame-styles";
+import GameButton from "../../../../components/GameButton/gameButton";
 
 interface Props {
   type: "loading" | "error";
@@ -12,7 +13,7 @@ export default function Overlay({ type, message, retry }: Props) {
   if (type === "loading") {
     return (
       <View style={styles.centerBox}>
-        <ActivityIndicator size="large" color="#FFCC00" />
+        <ActivityIndicator size="large" color="#000" />
       </View>
     );
   }
@@ -21,9 +22,9 @@ export default function Overlay({ type, message, retry }: Props) {
     <View style={styles.centerBox}>
       <Text style={styles.errorText}>{message || "Erro ao carregar"}</Text>
       {retry && (
-        <TouchableOpacity style={styles.button} onPress={retry}>
-          <Text style={styles.buttonText}>Tentar novamente</Text>
-        </TouchableOpacity>
+        <GameButton onPress={retry}>
+          <Text>Tentar novamente</Text>
+        </GameButton>
       )}
     </View>
   );
