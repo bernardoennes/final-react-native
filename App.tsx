@@ -4,11 +4,15 @@ import Escopa from "./screens/jogos/escopa/escopa";
 import Home from "./screens/home/home";
 import MemoryGame from "./screens/jogos/memory/MemoryGame";
 import { Routes } from "./routes";
+import Perfil from "./screens/perfil/perfil";
+import React from "react";
+import { UserProvider } from "./context/usercontext";
 
 function App() {
   return (
-    // <Routes/>
-    <MemoryGame />
+    <UserProvider>
+      <Routes />
+    </UserProvider>
   );
 }
 
