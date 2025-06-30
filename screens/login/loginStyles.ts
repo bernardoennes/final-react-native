@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  logo:{
-    width:140,
-    height:140,
-    resizeMode:"contain",
-    marginBottom:20,
-},
+  logo: {
+    width: 140,
+    height: 140,
+    resizeMode: "contain",
+    marginBottom: 20,
+  },
 
   background: {
     flex: 1,
@@ -16,15 +16,13 @@ const styles = StyleSheet.create({
   },
 
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)", 
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     padding: 30,
     margin: 20,
     borderRadius: 16,
     alignItems: "center",
-    width:"90%",
-    shadowColor:"#000",
-
-
+    width: "90%",
+    shadowColor: "#000",
   },
 
   container: {
@@ -81,6 +79,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  gameButton: {
+    width: "100%",
+    marginTop: 10,
   },
 });
 
