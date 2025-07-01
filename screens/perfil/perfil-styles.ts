@@ -6,18 +6,19 @@ export const perfilStyles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
+  avatarContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   avatar: {
     width: 140,
-    height: 200, // proporção aproximada de carta 2.5x3.5 polegadas
-    borderRadius: 10, // cantos levemente arredondados
-    alignSelf: 'center',
-    marginBottom: 20,
+    height: 140,
+    borderRadius: 70,
     borderWidth: 2,
     borderColor: '#fff',
-    resizeMode: 'contain',
-    backgroundColor: '#000', // para realçar o fundo da carta
+    resizeMode: 'cover',
+    backgroundColor: '#000',
   },
-
 
   titulo: {
     color: '#fff',

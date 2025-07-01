@@ -45,15 +45,14 @@ export default function RegisterScreen() {
 
   return (
     <View style={styles.background}>
-      <View style={styles.logoContainer}>
+      <View style={styles.container}>
+        <View style={styles.logoContainer}>
         <Image
           source={require("../../assets/logo.png")}
           style={styles.logo}
           resizeMode="contain"
         />
       </View>
-
-      <View style={styles.container}>
         <Text style={styles.title}>Cadastro</Text>
 
         <TextInput

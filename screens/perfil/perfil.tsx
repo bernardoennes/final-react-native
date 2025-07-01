@@ -1,40 +1,50 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  ImageBackground,
-  TouchableOpacity,
-  TextInput,
-  Image,
-} from 'react-native';
-import { perfilStyles as styles } from './perfil-styles';
-import NavBar from '../../components/navbar';
-import { useUser } from '../../context/usercontext'; 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from "react";
+import { View, Text, ScrollView, ImageBackground, TouchableOpacity, Image, Alert } from "react-native";
+import { perfilStyles as styles } from "./perfil-styles";
+import NavBar from "../../components/navbar";
+import { useUser } from "../../context/usercontext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as ImagePicker from "expo-image-picker";
 
-const background = require('../../assets/baizered-background.png');
+const background = require("../../assets/baizered-background.png");
+const defaultAvatar = require("../../assets/default-avatar.jpg");
+
 
 export default function Perfil() {
   const { usuario, atualizarUsuario } = useUser();
-  const [editando, setEditando] = useState(false);
 
-  const handleChange = (chave: keyof Usuario, valor: string) => {
-  if (!usuario) return;
-  atualizarUsuario({
-    ...usuario,
-    [chave]: valor || "",
-  } as Usuario);
-};
+  const escolherImagem = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-  const salvarAlteracoes = () => {
-    setEditando(false);
-    console.log("Alterações salvas!");
+    if (permissionResult.granted === false) {
+      Alert.alert("Permissão negada", "Permita acesso à galeria para continuar.");
+      return;
+    }
+
+    const pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!pickerResult.canceled) {
+      const uri = pickerResult.assets[0].uri;
+      if (!usuario) return;
+      const novoUsuario = { ...usuario, avatar: uri };
+      try {
+        await AsyncStorage.setItem("user", JSON.stringify(novoUsuario));
+        atualizarUsuario(novoUsuario);
+        Alert.alert("Sucesso", "Imagem alterada com sucesso!");
+      } catch (error) {
+        Alert.alert("Erro", "Não foi possível salvar a imagem.");
+      }
+    }
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem('user');
-    atualizarUsuario(null); // Limpa o usuário no contexto, se aplicável
+    await AsyncStorage.removeItem("user");
+    atualizarUsuario(null);
   };
 
   if (!usuario) {
@@ -49,91 +59,30 @@ export default function Perfil() {
     <ImageBackground source={background} style={styles.bg}>
       <NavBar />
       <ScrollView contentContainerStyle={styles.container}>
-        <Image
-          source={{
-            uri: usuario.avatar
-              ? `https://deckofcardsapi.com/static/img/${usuario.avatar}.png`
-              : 'https://deckofcardsapi.com/static/img/back.png'
-          }}
-          style={styles.avatar}
-        />
+        <View style={styles.avatarContainer}>
+          <TouchableOpacity onPress={escolherImagem}>
+            <Image
+              source={
+                usuario.avatar
+                  ? { uri: usuario.avatar }
+                  : defaultAvatar
+              }
+              style={styles.avatar}
+            />
+          </TouchableOpacity>
+        </View>
 
         <Text style={styles.titulo}>{usuario.nome}</Text>
-
         <View style={styles.card}>
-          {/* Avatar */}
-          <Text style={styles.label}>Carta Avatar (ex: KH):</Text>
-          {editando ? (
-            <TextInput
-              style={styles.valor}
-              value={usuario.avatar}
-              onChangeText={text => handleChange("avatar", text.toUpperCase())}
-              placeholder="Ex: KH"
-              placeholderTextColor="#666"
-              maxLength={2}
-            />
-          ) : (
-            <Text style={styles.valor}>{usuario.avatar || "Nenhuma"}</Text>
-          )}
-
-          {/* Nome */}
-          <Text style={styles.label}>Nome:</Text>
-          {editando ? (
-            <TextInput
-              style={styles.valor}
-              value={usuario.nome}
-              onChangeText={text => handleChange("nome", text)}
-              placeholder="Nome"
-              placeholderTextColor="#666"
-            />
-          ) : (
-            <Text style={styles.valor}>{usuario.nome}</Text>
-          )}
-
-          {/* Email */}
           <Text style={styles.label}>E-mail:</Text>
-          {editando ? (
-            <TextInput
-              style={styles.valor}
-              value={usuario.email}
-              onChangeText={text => handleChange("email", text)}
-              placeholder="E-mail"
-              placeholderTextColor="#666"
-              keyboardType="email-address"
-            />
-          ) : (
-            <Text style={styles.valor}>{usuario.email}</Text>
-          )}
-
-          {/* Senha */}
+          <Text style={styles.valor}>{usuario.email}</Text>
           <Text style={styles.label}>Senha:</Text>
-          {editando ? (
-            <TextInput
-              style={styles.valor}
-              value={usuario.senha}
-              onChangeText={text => handleChange("senha", text)}
-              placeholder="Senha"
-              placeholderTextColor="#666"
-              secureTextEntry
-            />
-          ) : (
-            <Text style={styles.valor}>{usuario.senha}</Text>
-          )}
+          <Text style={styles.valor}>{usuario.senha}</Text>
         </View>
 
         <TouchableOpacity
-          onPress={editando ? salvarAlteracoes : () => setEditando(true)}
-          style={styles.botao}
-        >
-          <Text style={styles.textoBotao}>
-            {editando ? "Salvar Alterações" : "Editar Perfil"}
-          </Text>
-        </TouchableOpacity>
-
-        {/* Botão de Logout */}
-        <TouchableOpacity
           onPress={handleLogout}
-          style={[styles.botao, { backgroundColor: '#c00', marginTop: 10 }]}
+          style={[styles.botao, { backgroundColor: "#c00", marginTop: 10 }]}
         >
           <Text style={styles.textoBotao}>Logout</Text>
         </TouchableOpacity>

@@ -8,10 +8,12 @@ import styles from "./loginStyles";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from "../../routes/nativestack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../../context/usercontext";
 
 type SkillScreenProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function LoginScreen({navigation}: SkillScreenProps) {
+  const { atualizarUsuario } = useUser();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -40,8 +42,8 @@ export default function LoginScreen({navigation}: SkillScreenProps) {
     } finally {
       if (usuario.senha === senha) {
         setLogado(true);
-        // Daqui pra frente, o trabalho é do Lucas
         await AsyncStorage.setItem('user', JSON.stringify(usuario));
+        atualizarUsuario(usuario);
         setLoading(false);
       }
       else setErroEFalse("Senha incorreta.");
@@ -58,24 +60,7 @@ export default function LoginScreen({navigation}: SkillScreenProps) {
     setSenha("");
     setErro("");
     setLogado(false);
-    // Ajeito depois
-    () => navigation.navigate("Home");
   };
-
-  if (logado)
-    return (
-      <ImageBackground
-        source={require("../../assets/baizered-background.png")}
-        style={styles.background}
-      >
-        <View style={styles.overlay}>
-          <Text style={styles.title}>Bem-vindo!</Text>
-          <Text style={styles.subtitle}>Acesso autorizado com sucesso</Text>
-          <Text style={styles.email}>Usuário: {email}</Text>
-          <GameButton onPress={handleLogout} style={styles.gameButton}>Sair</GameButton>
-        </View>
-      </ImageBackground>
-    );
 
   return (
     <ImageBackground

@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface Usuario {
   nome: string;
@@ -10,7 +10,7 @@ interface Usuario {
 
 interface UserContextType {
   usuario: Usuario | null;
-  atualizarUsuario: (novoUsuario: Usuario) => void;
+  atualizarUsuario: (novoUsuario: Usuario | null) => void;
   carregando: boolean;
 }
 
@@ -20,17 +20,19 @@ const UserContext = createContext<UserContextType>({
   carregando: true,
 });
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     async function carregarUsuario() {
       try {
-        const salvo = await AsyncStorage.getItem('user');
+        const salvo = await AsyncStorage.getItem("user");
         if (salvo) setUsuario(JSON.parse(salvo));
       } catch (e) {
-        console.log('Erro ao carregar usuário:', e);
+        console.log("Erro ao carregar usuário:", e);
       } finally {
         setCarregando(false);
       }
@@ -38,12 +40,17 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     carregarUsuario();
   }, []);
 
-  const atualizarUsuario = async (novoUsuario: Usuario) => {
+  const atualizarUsuario = async (novoUsuario: Usuario | null) => {
     try {
-      await AsyncStorage.setItem('usuario', JSON.stringify(novoUsuario));
-      setUsuario(novoUsuario);
+      if (novoUsuario) {
+        await AsyncStorage.setItem("user", JSON.stringify(novoUsuario));
+        setUsuario(novoUsuario);
+      } else {
+        await AsyncStorage.removeItem("user");
+        setUsuario(null);
+      }
     } catch (e) {
-      console.log('Erro ao salvar usuário:', e);
+      console.log("Erro ao salvar usuário:", e);
     }
   };
 
