@@ -1,6 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { House, SignIn } from "phosphor-react-native"; // Importe os ícones desejados
 import LoginScreen from "../../screens/login/Login";
+import Perfil from "../../screens/perfil/perfil";
+import { useUser } from "../../context/usercontext";
 import RegisterScreen from "../../screens/register/RegisterScreen";
 import { Home } from "../../screens/home/home";
 
@@ -14,6 +16,7 @@ export type TabParamList = {
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export const BottomTabs = () => {
+  const { usuario } = useUser(); 
   return (
     <Tab.Navigator
       screenOptions={{
@@ -34,7 +37,7 @@ export const BottomTabs = () => {
       />
       <Tab.Screen
         name="Login"
-        component={LoginScreen}
+        component={usuario ? Perfil : LoginScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <SignIn color={color} size={size ?? 24} />

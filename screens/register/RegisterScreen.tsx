@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Alert,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from "react-native";
 import styles from "./register-style";
 import axios from "axios";
+import GameButton from "../../components/GameButton/gameButton";
 
 export default function RegisterScreen() {
   const [nome, setNome] = useState("");
@@ -93,28 +87,8 @@ export default function RegisterScreen() {
           value={confirmarSenha}
           onChangeText={setConfirmarSenha}
         />
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.7}
-          onPress={handleCadastro}
-        >
-          <Text style={styles.buttonText}>Cadastrar</Text>
-        </TouchableOpacity>
+        <GameButton onPress={handleCadastro}>Cadastrar</GameButton>
       </View>
-
-      <TouchableOpacity
-        style={styles.homeFloatingButton}
-        activeOpacity={0.7}
-        onPress={() => {
-          console.log("Botão de home pressionado");
-        }}
-      >
-        <Image
-          source={require("../../assets/home.png")}
-          style={styles.homeIcon}
-        />
-      </TouchableOpacity>
     </View>
   );
 }

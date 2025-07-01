@@ -4,9 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface Usuario {
   nome: string;
   email: string;
-  celular: string;
   senha: string;
-  idade: string;
   avatar: string;
 }
 
@@ -29,7 +27,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     async function carregarUsuario() {
       try {
-        const salvo = await AsyncStorage.getItem('usuario');
+        const salvo = await AsyncStorage.getItem('user');
         if (salvo) setUsuario(JSON.parse(salvo));
       } catch (e) {
         console.log('Erro ao carregar usuário:', e);

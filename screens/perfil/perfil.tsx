@@ -9,21 +9,32 @@ import {
   Image,
 } from 'react-native';
 import { perfilStyles as styles } from './perfil-styles';
-import background from '../../assets/baizered-background.png';
 import NavBar from '../../components/navbar';
-import { useUser } from '../../context/usercontext'; // Caminho corrigido
+import { useUser } from '../../context/usercontext'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const background = require('../../assets/baizered-background.png');
 
 export default function Perfil() {
   const { usuario, atualizarUsuario } = useUser();
   const [editando, setEditando] = useState(false);
 
-  const handleChange = (chave: string, valor: string) => {
-    atualizarUsuario({ ...usuario, [chave]: valor });
-  };
+  const handleChange = (chave: keyof Usuario, valor: string) => {
+  if (!usuario) return;
+  atualizarUsuario({
+    ...usuario,
+    [chave]: valor || "",
+  } as Usuario);
+};
 
   const salvarAlteracoes = () => {
     setEditando(false);
     console.log("Alterações salvas!");
+  };
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('user');
+    atualizarUsuario(null); // Limpa o usuário no contexto, se aplicável
   };
 
   if (!usuario) {
@@ -94,21 +105,6 @@ export default function Perfil() {
             <Text style={styles.valor}>{usuario.email}</Text>
           )}
 
-          {/* Celular */}
-          <Text style={styles.label}>Celular:</Text>
-          {editando ? (
-            <TextInput
-              style={styles.valor}
-              value={usuario.celular}
-              onChangeText={text => handleChange("celular", text)}
-              placeholder="Celular"
-              placeholderTextColor="#666"
-              keyboardType="phone-pad"
-            />
-          ) : (
-            <Text style={styles.valor}>{usuario.celular}</Text>
-          )}
-
           {/* Senha */}
           <Text style={styles.label}>Senha:</Text>
           {editando ? (
@@ -123,21 +119,6 @@ export default function Perfil() {
           ) : (
             <Text style={styles.valor}>{usuario.senha}</Text>
           )}
-
-          {/* Idade */}
-          <Text style={styles.label}>Idade:</Text>
-          {editando ? (
-            <TextInput
-              style={styles.valor}
-              value={usuario.idade}
-              onChangeText={text => handleChange("idade", text)}
-              placeholder="Idade"
-              placeholderTextColor="#666"
-              keyboardType="numeric"
-            />
-          ) : (
-            <Text style={styles.valor}>{usuario.idade}</Text>
-          )}
         </View>
 
         <TouchableOpacity
@@ -147,6 +128,14 @@ export default function Perfil() {
           <Text style={styles.textoBotao}>
             {editando ? "Salvar Alterações" : "Editar Perfil"}
           </Text>
+        </TouchableOpacity>
+
+        {/* Botão de Logout */}
+        <TouchableOpacity
+          onPress={handleLogout}
+          style={[styles.botao, { backgroundColor: '#c00', marginTop: 10 }]}
+        >
+          <Text style={styles.textoBotao}>Logout</Text>
         </TouchableOpacity>
       </ScrollView>
     </ImageBackground>
