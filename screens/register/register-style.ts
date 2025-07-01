@@ -1,10 +1,13 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    backgroundColor: "#7a0e0e",
-  },
+ backgroundImage: {
+  flex: 1,
+  width: "100%",
+  height: "100%",
+  justifyContent: "center",
+  alignItems: "center",
+},
   logoContainer: {
     alignItems: "center",
     paddingTop: 32,
@@ -64,6 +67,14 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     tintColor: "#fff",
+  },
+
+    card: {
+    width: "90%",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    padding: 24,
+    borderRadius: 20,
+    alignItems: "center",
   },
 
 });
