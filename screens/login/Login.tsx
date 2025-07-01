@@ -27,7 +27,7 @@ export default function LoginScreen({navigation}: SkillScreenProps) {
     setLoading(true);
     setErro("");
     if (!email || !senha) return setErroEFalse("Preencha todos os campos.");
-    if (!validarEmail(email)) return setErroEFalse("E-mail inválido.");
+    if (!validarEmail(email)) return setErroEFalse("E-mail ou senha inválido.");
     if (senha.length < 6)
       return setErroEFalse("A senha deve ter pelo menos 6 caracteres.");
 
@@ -90,7 +90,7 @@ export default function LoginScreen({navigation}: SkillScreenProps) {
           Entrar
         </GameButton>
         <GameButton onPress={() => navigation.navigate("Register")} style={styles.gameButton}>
-          Ja possui uma conta? Cadastre-se
+          Cadastre-se
         </GameButton>
       </View>
     </ImageBackground>

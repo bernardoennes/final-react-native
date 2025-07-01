@@ -12,7 +12,7 @@ import { useDealerPlay } from "./utils/useDealerPlay";
 import { usePlayCard } from "./utils/usePlayCard";
 import { NavBar } from "../../../components/navbar";
 
-const background = require("../../../assets/baizered-background.png");
+const background = require("../../../assets/baizegreen-background.png");
 
 const Escopa = () => {
   const {
