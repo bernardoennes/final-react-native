@@ -90,7 +90,7 @@ export default function LoginScreen({navigation}: SkillScreenProps) {
           Entrar
         </GameButton>
         <GameButton onPress={() => navigation.navigate("Register")} style={styles.gameButton}>
-          Ja possui uma conta? Cadastre-se
+          Cadastre-se
         </GameButton>
       </View>
     </ImageBackground>
