@@ -45,7 +45,7 @@ const Escopa = () => {
     <ImageBackground source={background} style={styles.imageBackground}>
       <NavBar/>
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
+        <ScrollView contentContainerStyle={styles.scroll}>
           <View style={styles.container}>
             <Text style={styles.title}>ESCOPA</Text>
             <DealerHand count={dealerHand.length} />

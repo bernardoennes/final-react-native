@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
   },
-  scrollContent: {
+  scroll: {
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",

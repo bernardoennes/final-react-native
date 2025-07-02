@@ -26,14 +26,12 @@ export default function RegisterScreen() {
       Alert.alert("Erro", "Digite um e-mail válido.");
       return;
     }
+    
+    if (senha.length < 6)
+      return Alert.alert("A senha deve ter pelo menos 6 caracteres.");
 
     if (senha !== confirmarSenha) {
       Alert.alert("Erro", "As senhas não coincidem.");
-      return;
-    }
-    
-    if (senha.length < 6)
-      Alert.alert("A senha deve ter pelo menos 6 caracteres.");
       return;
     }
 
