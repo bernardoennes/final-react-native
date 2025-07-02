@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Alert, Image, ImageBackground } from "react-native";
 import styles from "./register-style";
-import RegisterForm from "../../components/RegisterForm";
+import RegisterForm from "../../components/RegisterForm/index";
 import GameButton from "../../components/GameButton/gameButton";
 import axios from "axios";
 
@@ -62,7 +62,6 @@ export default function RegisterScreen() {
     source={require("../../assets/baizered-background.png")}
     style={styles.backgroundImage}
   >
-    <View style={styles.background}>
       <View style={styles.container}>
         <View style={styles.card}>
         <View style={styles.logoContainer}>
@@ -80,7 +79,6 @@ export default function RegisterScreen() {
 
         <GameButton onPress={handleCadastro}>Cadastrar</GameButton>
       </View>
-    </View>
     </View>
     </ImageBackground>
   );

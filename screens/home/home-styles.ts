@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
 
     scroll: {
         flex: 1,
+        borderBottomWidth: 5,
     },
 
     scrollContent: {

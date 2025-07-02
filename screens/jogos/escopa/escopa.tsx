@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, Text, ImageBackground } from "react-native";
+import { SafeAreaView, Text, ImageBackground, ScrollView, View } from "react-native";
 import styles from "./escopa-styles";
 import Loading from "../../../components/Loading/loading";
 import DealerHand from "./components/DealerHand";
@@ -42,44 +42,50 @@ const Escopa = () => {
   if (loading) return <Loading />;
 
   return (
-    <ImageBackground source={background} style={{ flex: 1 }}>
-      <NavBar></NavBar>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>ESCOPA</Text>
-        <DealerHand count={dealerHand.length} />
-        <Table
-          cards={tableCards}
-          selected={selectedTableCards}
-          onPress={(card: Card) => {
-            const isSelected = selectedTableCards.some(
-              (c) => c.code === card.code
-            );
-            if (isSelected) {
-              setSelectedTableCards((prev) =>
-                prev.filter((c) => c.code !== card.code)
-              );
-            } else {
-              setSelectedTableCards((prev) => [...prev, card]);
-            }
-          }}
-        />
-        <PlayerHand
-          cards={playerHand}
-          selected={selectedCard}
-          onPress={setSelectedCard}
-        />
-        {!isPlayerTurn && !gameOver && (
-          <Text style={styles.dealerTurnText}>Turno do dealer...</Text>
-        )}
-        <GameFooter
-          message={message} gameOver={gameOver}
-          onRestart={startGame} playerHand={playerHand}
-          dealerHand={dealerHand} playerCaptured={playerCaptured}
-          dealerCaptured={dealerCaptured} setMessage={setMessage}
-          setIsPlayerTurn={setIsPlayerTurn} setGameOver={setGameOver}
-          selectedCard={selectedCard} selectedTableCards={selectedTableCards}
-          isPlayerTurn={isPlayerTurn} playCard={playCard}
-        />
+    <ImageBackground source={background} style={styles.imageBackground}>
+      <NavBar/>
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          <View style={styles.container}>
+            <Text style={styles.title}>ESCOPA</Text>
+            <DealerHand count={dealerHand.length} />
+            <Table
+              cards={tableCards}
+              selected={selectedTableCards}
+              onPress={(card: Card) => {
+                const isSelected = selectedTableCards.some(
+                  (c) => c.code === card.code
+                );
+                if (isSelected) {
+                  setSelectedTableCards((prev) =>
+                    prev.filter((c) => c.code !== card.code)
+                  );
+                } else {
+                  setSelectedTableCards((prev) => [...prev, card]);
+                }
+              }}
+            />
+            <PlayerHand
+              cards={playerHand}
+              selected={selectedCard}
+              onPress={setSelectedCard}
+            />
+            {!isPlayerTurn && !gameOver && (
+              <Text style={styles.dealerTurnText}>Turno do dealer...</Text>
+            )}
+            <View style={styles.gameFooterWrapper}>
+              <GameFooter
+                message={message} gameOver={gameOver}
+                onRestart={startGame} playerHand={playerHand}
+                dealerHand={dealerHand} playerCaptured={playerCaptured}
+                dealerCaptured={dealerCaptured} setMessage={setMessage}
+                setIsPlayerTurn={setIsPlayerTurn} setGameOver={setGameOver}
+                selectedCard={selectedCard} selectedTableCards={selectedTableCards}
+                isPlayerTurn={isPlayerTurn} playCard={playCard}
+              />
+            </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

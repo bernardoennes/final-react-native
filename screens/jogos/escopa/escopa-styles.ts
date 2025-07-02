@@ -119,6 +119,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
   },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  safeArea: {
+    flex: 1,
+  },
+  imageBackground: {
+    flex: 1,
+  },
+  gameFooterWrapper: {
+    width: "100%",
+    alignItems: "center",
+  },
 });
 
 export default styles;

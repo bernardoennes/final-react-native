@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -31,11 +32,13 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#fff",
-    width: "100%",
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
+    borderRadius: 10,
+    paddingVertical: 14,
+    paddingHorizontal: 12,
     fontSize: 16,
+    paddingRight: 40,
+    width: "100%",
+    marginBottom: 15,
   },
   button: {
     backgroundColor: "#000000",

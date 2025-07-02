@@ -19,14 +19,8 @@ interface UseDealerPlayParams {
   setIsPlayerTurn: (b: boolean) => void;
 }
 
-export function useDealerPlay({
-  dealerHand,
-  tableCards,
-  setDealerHand,
-  setTableCards,
-  setDealerCaptured,
-  dealerCaptured,
-  setIsPlayerTurn,
+export function useDealerPlay({dealerHand, tableCards, setDealerHand, setTableCards,
+  setDealerCaptured, dealerCaptured, setIsPlayerTurn,
 }: UseDealerPlayParams) {
   return useCallback(() => {
     if (dealerHand.length === 0) {

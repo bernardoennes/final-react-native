@@ -7,11 +7,13 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#fff",
-    width: "90%",
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 10,
-    fontSize: 14, // tamanho reduzido
+    borderRadius: 10,
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+    fontSize: 16,
+    paddingRight: 40,
+    width: "100%",
+    marginBottom: 15,
   },
 });
 
