@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, Image, ImageBackground } from "react-native";
 import axios from "axios";
 import Input from "./components/Input";
-import Button from "./components/Button";
 import GameButton from "../../components/GameButton/gameButton";
 import styles from "./loginStyles";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -55,12 +54,7 @@ export default function LoginScreen({navigation}: SkillScreenProps) {
     setLoading(false);
   };
 
-  const handleLogout = () => {
-    setEmail("");
-    setSenha("");
-    setErro("");
-    setLogado(false);
-  };
+ 
 
   return (
     <ImageBackground
