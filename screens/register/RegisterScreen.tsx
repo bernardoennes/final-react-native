@@ -31,6 +31,11 @@ export default function RegisterScreen() {
       Alert.alert("Erro", "As senhas não coincidem.");
       return;
     }
+    
+    if (senha.length < 6)
+      Alert.alert("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
 
     try {
       const res = await axios.get("https://685ddf0e7b57aebd2af75044.mockapi.io/user");
